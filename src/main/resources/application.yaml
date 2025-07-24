@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: review_multi
+  profiles:
+    active: dev
+    include: swagger
