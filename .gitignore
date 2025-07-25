@@ -34,7 +34,7 @@ build/
 
 ### custom
 *.md
-pom.xml
+#pom.xml
 mvnw
 mvnw.cmd
 .mvn/
