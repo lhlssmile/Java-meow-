@@ -21,4 +21,4 @@ services:
       "
 volumes:
   jenkins_home:
-    driver: local
+    external: true  # 使用已存在的数据卷
