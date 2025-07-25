@@ -14,11 +14,12 @@ pipeline {
         }
         stage("Docker Build") {
             steps {
-                withCredentials([file(credentialsId: 'meyaml', variable: 'YAML_FILE')]) {
-                    sh "cp \$YAML_FILE src/main/resources/application-dev.yaml"
-                    sh "docker build -t review_multi:latest ."
-                }
-            }
+        withCredentials([file(credentialsId: 'meyaml', variable: 'YAML_FILE')]) {
+            sh "mkdir -p src/main/resources"
+            sh "cp \$YAML_FILE src/main/resources/application-dev.yaml"
+            sh "docker build -t review_multi:latest ."
+        }
+    }
         }
         stage("Deploy") {
             steps {
