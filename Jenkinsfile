@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage("Checkout") {
             steps {
-                git url: "git@github.com:lhlssmile/Java-meow-.git", branch: "main", credentialsId: "github-ssh"
+                git url: "https://github.com/lhlssmile/Java-meow-.git", branch: "main", credentialsId: "github-pat-credentials"
             }
         }
         stage("Build") {
