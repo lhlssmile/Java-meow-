@@ -38,3 +38,7 @@ pom.xml
 mvnw
 mvnw.cmd
 .mvn/
+# .gitignore
+src/main/resources/*.yaml
+src/main/resources/*.yml
+src/main/resources/application.properties
