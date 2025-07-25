@@ -9,7 +9,10 @@ pipeline {
         stage("Build") {
             steps {
                 echo "Building..."
-                sh "mvn clean package -DskipTests"
+                script {
+                    // 使用Docker Maven镜像来构建项目，避免在Jenkins容器中安装Maven
+                    sh "docker run --rm -v \$PWD:/app -w /app maven:3.8.6-openjdk-17 mvn clean package -DskipTests"
+                }
             }
         }
         stage("Docker Build") {
