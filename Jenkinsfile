@@ -17,14 +17,14 @@ pipeline {
                 withCredentials([file(credentialsId: 'meyaml', variable: 'YAML_FILE')]) {
                     // 调试信息
                     sh "pwd"
-                    sh "echo 'YAML_FILE: '\$YAML_FILE"
-                    sh "ls -la \$YAML_FILE"
+                    sh "echo 'YAML_FILE: '\"\$YAML_FILE\""
+                    sh "ls -la \"\$YAML_FILE\""
                     
                     // 确保目录存在
                     sh "mkdir -p src/main/resources"
                     
-                    // 使用cat重定向，更可靠
-                    sh "cat \$YAML_FILE > src/main/resources/application-dev.yaml"
+                    // 使用cat重定向，更可靠，添加引号处理空格和特殊字符
+                    sh "cat \"\$YAML_FILE\" > src/main/resources/application-dev.yaml"
                     
                     // 验证文件复制成功
                     sh "ls -la src/main/resources/"
