@@ -19,9 +19,6 @@ RUN apt-get update && apt-get install -y curl && \
 # 构建项目，跳过测试加速
 RUN mvn --version && mvn clean package -DskipTests
 
-# 从 Jenkins 机密注入 application-dev.yaml
-COPY --from=jenkins /var/jenkins_home/secrets/application-dev-secret /app/src/main/resources/application-dev.yaml
-
 # 暴露应用端口
 EXPOSE 8080
 
