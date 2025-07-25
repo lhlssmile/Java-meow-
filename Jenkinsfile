@@ -15,24 +15,25 @@ pipeline {
         stage("Docker Build") {
             steps {
                 withCredentials([file(credentialsId: 'meyaml', variable: 'YAML_FILE')]) {
-                    // 调试：查看当前工作目录和文件结构
+                    // 调试信息
                     sh "pwd"
-                    sh "ls -la"
+                    sh "echo 'YAML_FILE: '\$YAML_FILE"
+                    sh "ls -la \$YAML_FILE"
                     
                     // 确保目录存在
                     sh "mkdir -p src/main/resources"
-                    sh "ls -la src/main/resources"
                     
-                    // 使用绝对路径复制文件
-                    sh "cp \$YAML_FILE ./src/main/resources/application-dev.yaml"
+                    // 使用cat重定向，更可靠
+                    sh "cat \$YAML_FILE > src/main/resources/application-dev.yaml"
                     
                     // 验证文件复制成功
                     sh "ls -la src/main/resources/"
+                    sh "cat src/main/resources/application-dev.yaml"
                     
                     sh "docker build -t review_multi:latest ."
                 }
             }
-        }
+}
         stage("Deploy") {
             steps {
                 sh "docker stop review_multi_container || true"
